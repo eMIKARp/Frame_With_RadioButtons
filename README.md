@@ -20,27 +20,36 @@ a piece of code that displays a frame with radio buttons which change the font s
        
     JPanel panel1 = new JPanel();
     JPanel panel2 = new JPanel();
+    JPanel panel3 = new JPanel();
     JLabel label = new JLabel("Lorem ipusm");
     ButtonGroup groupSize = new ButtonGroup();
+    ButtonGroup groupColor = new ButtonGroup();
   
     public void initComponents() 
     {
         this.setTitle("Grupy przełączników typu Radio");
         this.setBounds(300, 300, 400, 100);
         
-        zbudujPrzelacznik("Mały", 10);
-        zbudujPrzelacznik("Średni", 20);
-        zbudujPrzelacznik("Duży", 30);
-        zbudujPrzelacznik("Wielki", 40);
+        zbudujPrzelacznikRozmiaru("Mały", 10);
+        zbudujPrzelacznikRozmiaru("Średni", 20);
+        zbudujPrzelacznikRozmiaru("Duży", 30);
+        zbudujPrzelacznikRozmiaru("Wielki", 40);
+        
+        zbudujPrzelacznikKoloru("Czerwony", Color.RED);
+        zbudujPrzelacznikKoloru("Niebieski", Color.BLUE);
+        zbudujPrzelacznikKoloru("Żółty", Color.YELLOW);
+        
               
-        panel2.add(label);
+        panel3.add(label);
         
         this.getContentPane().add(panel1, BorderLayout.NORTH);
         this.getContentPane().add(panel2, BorderLayout.CENTER);
+        this.getContentPane().add(panel3, BorderLayout.SOUTH);
+        
         this.setDefaultCloseOperation(3);
     }
     
-     public void zbudujPrzelacznik(String nazwa, final int rozmiar)
+     public void zbudujPrzelacznikRozmiaru(String nazwa, final int rozmiar)
      {
             JRadioButton nowyButton = new JRadioButton(nazwa);
             groupSize.add(nowyButton);  
@@ -51,7 +60,22 @@ a piece of code that displays a frame with radio buttons which change the font s
                 {
                    label.setFont(new Font("Monospaced", Font.ITALIC, rozmiar));
                 }
-            });
+            });    
+
+     }   
+     
+     public void zbudujPrzelacznikKoloru(String nazwa, final Color kolor)
+     {
+            JRadioButton nowyButton = new JRadioButton(nazwa);
+            groupColor.add(nowyButton);  
+            panel2.add(nowyButton);
+            nowyButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) 
+                {
+                   label.setForeground(kolor);
+                }
+            });    
 
      }   
     
@@ -61,3 +85,4 @@ a piece of code that displays a frame with radio buttons which change the font s
         new Main().setVisible(true);   
     }
     }
+
